@@ -1,10 +1,21 @@
-import mockData from "./mockData.js";
+import mockData from "../mockData";
+import { Row, Col } from "react-bootstrap";
+import Product from "../components/Product";
 
 const Home = () => {
+  const products = mockData.map((product) => {
+    return (
+      <Col sm={12} md={6} lg={4} xl={3} key={product.id}>
+        <h3>{product.name}</h3>
+        <Product {...product} />
+      </Col>
+    );
+  });
+
   return (
-    <>
-      <h1>Latest Product</h1>
-    </>
+    <article>
+      <Row>{products}</Row>
+    </article>
   );
 };
 
