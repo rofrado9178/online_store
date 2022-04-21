@@ -1,4 +1,5 @@
 import { Card } from "react-bootstrap";
+import Rating from "./Rating";
 
 const Product = (props) => {
   console.log(props);
@@ -29,7 +30,7 @@ const Product = (props) => {
         <Card.Text as="h3">${price}</Card.Text>
         <Card.Text>
           <aside className="my-3">
-            {rating} from {totalReview} reviews
+            <Rating rating={rating} totalReview={totalReview} />
           </aside>
         </Card.Text>
       </Card.Body>

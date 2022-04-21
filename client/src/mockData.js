@@ -25,7 +25,7 @@ const mockData = [
   },
   {
     id: "3",
-    name: "Book Shelf",
+    name: "Bookcase",
     image: "/images/book-shelf.jpg",
     description: "Artistic book shelf mini",
     brand: "Blizzard Decoration",
@@ -142,7 +142,7 @@ const mockData = [
     price: 225.4,
     stock: 10,
     rating: 4.2,
-    totalReview: 0,
+    totalReview: 1,
   },
   {
     id: "13",
