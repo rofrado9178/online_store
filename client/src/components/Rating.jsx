@@ -5,7 +5,7 @@ const Rating = (props) => {
 
   return (
     <aside>
-      <span>
+      <span className="star-rating">
         {starRating(rating)}
         {totalReview}
       </span>

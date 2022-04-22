@@ -1,10 +1,29 @@
 main {
   min-height: 80vh;
 }
-
+p {
+  font-size: 0.8rem;
+}
+.card-title {
+  text-decoration: none;
+}
+.product-price {
+  font-size: 0.8rem;
+}
 .my-card {
-  height: 450px;
+  height: 350px;
 }
 .product-img {
   height: 200px;
+}
+.star-rating {
+  font-size: 10px;
+}
+
+.in-stock {
+  font-size: 12px;
+}
+.out-of-stock {
+  font-size: 12px;
+  color: red;
 }

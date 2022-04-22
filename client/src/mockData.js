@@ -19,7 +19,7 @@ const mockData = [
     brand: "Home-Plant",
     category: "Plant",
     price: 25.4,
-    stock: 10,
+    stock: 0,
     rating: 4.2,
     totalReview: 15,
   },

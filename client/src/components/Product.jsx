@@ -22,12 +22,11 @@ const Product = (props) => {
         <Card.Img className="product-img" src={image} />
       </Link>
       <Card.Body>
-        <Link to={`/product/${id}`}>
+        <Link to={`/product/${id}`} className="card-title">
           <Card.Title>
             <strong>{name}</strong>
           </Card.Title>
         </Link>
-        <Card.Text>{description}</Card.Text>
         <Card.Text as="h3">${price}</Card.Text>
         <Card.Text>
           <aside className="my-3">
