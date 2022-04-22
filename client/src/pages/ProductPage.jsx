@@ -1,13 +1,5 @@
 import { Link } from "react-router-dom";
-import {
-  Row,
-  Col,
-  Image,
-  ListGroup,
-  Button,
-  Card,
-  ListGroupItem,
-} from "react-bootstrap";
+import { Row, Col, Image, ListGroup, Button, Card } from "react-bootstrap";
 import Rating from "../components/Rating";
 import { useParams } from "react-router-dom";
 import mockData from "../mockData";
@@ -15,7 +7,7 @@ import mockData from "../mockData";
 const ProductPage = () => {
   const { id } = useParams();
   const product = mockData.find((product) => id === product.id);
-  const { image, name, description, totalReview, rating, price, stock } =
+  const { image, name, description, totalReview, rating, price, stock, brand } =
     product;
 
   return (
@@ -31,10 +23,10 @@ const ProductPage = () => {
           <ListGroup variant="flush">
             <ListGroup.Item>
               <h3>{name}</h3>
+              <p className="brand">Brand: {brand}</p>
               <Rating rating={rating} />
               <p>{totalReview} reviews</p>
             </ListGroup.Item>
-
             <ListGroup.Item className="product-price">
               Price: ${price}
             </ListGroup.Item>

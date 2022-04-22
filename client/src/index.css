@@ -19,7 +19,12 @@ p {
 .star-rating {
   font-size: 10px;
 }
-
+.brand {
+  padding: 0;
+  margin: 0;
+  font-size: 10px;
+  color: rgb(62, 62, 177);
+}
 .in-stock {
   font-size: 12px;
 }
