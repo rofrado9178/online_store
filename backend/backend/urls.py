@@ -17,8 +17,8 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path("admin/", admin.site.urls),
     #it will show to get routes from base folder and urls file
-    path("", include("base.urls"))
+    path("api/", include("base.urls"))
     
 ]
