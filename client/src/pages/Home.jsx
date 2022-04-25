@@ -1,6 +1,8 @@
 import mockData from "../mockData";
 import { Row, Col } from "react-bootstrap";
 import Product from "../components/Product";
+// import axios from "axios";
+// import { useEffect, useState } from "react";
 
 const Home = () => {
   const products = mockData.map((product) => {
