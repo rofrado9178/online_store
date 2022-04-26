@@ -8,14 +8,15 @@ import useApplicationData from "./hooks/useApplicationData";
 
 const App = () => {
   const { state, useState } = useApplicationData();
-  console.log("this is state", state);
+  const { products } = state;
+  console.log("this is products", products);
   return (
     <Router>
       <Header />
       <main className="py-3">
         <Container>
           <Routes>
-            <Route exact path="/" element={<Home />} />
+            <Route exact path="/" element={<Home products={products} />} />
             <Route exact path="/product/:id" element={<ProductPage />} />
           </Routes>
         </Container>
