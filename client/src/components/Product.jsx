@@ -3,7 +3,6 @@ import Rating from "./Rating";
 import { Link } from "react-router-dom";
 
 const Product = (props) => {
-  console.log(props);
   const { id, name, image, price, rating, totalReview } = props;
   return (
     <Card className="my-card my-3 p-3 rounded">

@@ -7,12 +7,10 @@ const useApplicationData = () => {
   });
 
   useEffect(() => {
-    Promise.all([axios.get("http://localhost:8000/api/products/")]).then(
-      (all) => {
-        const [products] = all;
-        setState((prev) => ({ ...prev, products: products.data }));
-      }
-    );
+    Promise.all([axios.get("/api/products")]).then((all) => {
+      const [products] = all;
+      setState((prev) => ({ ...prev, products: products.data }));
+    });
   }, []);
 
   return { state, setState };
