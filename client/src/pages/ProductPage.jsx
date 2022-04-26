@@ -2,11 +2,10 @@ import { Link } from "react-router-dom";
 import { Row, Col, Image, ListGroup, Button, Card } from "react-bootstrap";
 import Rating from "../components/Rating";
 import { useParams } from "react-router-dom";
-import mockData from "../mockData";
 
-const ProductPage = () => {
+const ProductPage = (props) => {
   const { id } = useParams();
-  const product = mockData.find((product) => id === product.id);
+  const product = props.products.find((product) => id === product.id);
   const { image, name, description, totalReview, rating, price, stock, brand } =
     product;
 

@@ -4,12 +4,13 @@ import axios from "axios";
 const useApplicationData = () => {
   const [state, setState] = useState({
     products: [],
+    isReady: false,
   });
 
   useEffect(() => {
     Promise.all([axios.get("/api/products")]).then((all) => {
       const [products] = all;
-      setState((prev) => ({ ...prev, products: products.data }));
+      setState((prev) => ({ ...prev, products: products.data, isReady: true }));
     });
   }, []);
 
