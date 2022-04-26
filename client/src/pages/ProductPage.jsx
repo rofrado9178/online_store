@@ -8,7 +8,7 @@ const ProductPage = (props) => {
   const product = props.products.find((product) => id === product.id);
   const { image, name, description, totalReview, rating, price, stock, brand } =
     product;
-
+  console.log(product);
   return (
     <article>
       <Link to="/" className="card-title">
