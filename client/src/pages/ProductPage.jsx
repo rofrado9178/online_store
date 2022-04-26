@@ -5,7 +5,8 @@ import { useParams } from "react-router-dom";
 
 const ProductPage = (props) => {
   const { id } = useParams();
-  const product = props.products.find((product) => id === product.id);
+  console.log(id);
+  const product = props.products.find((product) => Number(id) === product.id);
   const { image, name, description, totalReview, rating, price, stock, brand } =
     product;
   console.log(product);
