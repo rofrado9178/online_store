@@ -124,6 +124,14 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+#to find static folder
+STATICFILES_DIRS = [
+    BASE_DIR / 'static'
+]
+
+#to find images folder from static folder
+MEDIA_ROOT = 'static/images'
+
 CORS_ALLOW_ALL_ORIGINS = True
 
 # Default primary key field type
