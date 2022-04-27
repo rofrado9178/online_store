@@ -1,9 +1,19 @@
 import { Row, Col } from "react-bootstrap";
 import Product from "../components/Product";
+import { listProducts } from "../actions/productActions";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 
-const Home = (props) => {
-  console.log(props);
-  const products = props.products.map((product) => {
+const Home = () => {
+  const dispatch = useDispatch();
+  const productList = useSelector((state) => state.productList);
+  const { error, loading, products } = productList;
+
+  useEffect(() => {
+    dispatch(listProducts());
+  }, []);
+
+  const allProducts = products.map((product) => {
     return (
       <Col sm={12} md={6} lg={4} xl={3} key={product.id}>
         <Product {...product} />
@@ -13,7 +23,7 @@ const Home = (props) => {
 
   return (
     <article>
-      <Row>{products}</Row>
+      <Row>{allProducts}</Row>
     </article>
   );
 };
