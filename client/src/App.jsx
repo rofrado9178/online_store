@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import ProductPage from "./pages/ProductPage";
+import CartPage from "./pages/CartPage";
 import Loading from "./components/Loading";
 import useApplicationData from "./hooks/useApplicationData";
 
@@ -22,6 +23,7 @@ const App = () => {
           <Routes>
             <Route exact path="/" element={<Home />} />
             <Route exact path="/product/:id" element={<ProductPage />} />
+            <Route exact path="/cart/:id?" element={<CartPage />} />
           </Routes>
         </Container>
       </main>
