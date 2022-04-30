@@ -3,6 +3,8 @@ import Product from "../components/Product";
 import { listProducts } from "../actions/productActions";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import Loading from "../components/Loading";
+import Error from "../components/Error";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -13,13 +15,19 @@ const Home = () => {
     dispatch(listProducts());
   }, []);
 
-  const allProducts = products.map((product) => {
-    return (
-      <Col sm={12} md={6} lg={4} xl={3} key={product.id}>
-        <Product {...product} />
-      </Col>
-    );
-  });
+  const allProducts = loading ? (
+    <Loading />
+  ) : error ? (
+    <Error variant="danger"> {error} </Error>
+  ) : (
+    products.map((product) => {
+      return (
+        <Col sm={12} md={6} lg={4} xl={3} key={product.id}>
+          <Product {...product} />
+        </Col>
+      );
+    })
+  );
 
   return (
     <article>
