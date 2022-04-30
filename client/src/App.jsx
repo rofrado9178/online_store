@@ -5,7 +5,7 @@ import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import ProductPage from "./pages/ProductPage";
 import Loading from "./components/Loading";
-// import useApplicationData from "./hooks/useApplicationData";
+import useApplicationData from "./hooks/useApplicationData";
 
 const App = () => {
   // const { state, useState } = useApplicationData();

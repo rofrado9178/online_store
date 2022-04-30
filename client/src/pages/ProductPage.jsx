@@ -2,15 +2,30 @@ import { Link } from "react-router-dom";
 import { Row, Col, Image, ListGroup, Button, Card } from "react-bootstrap";
 import Rating from "../components/Rating";
 import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import Loading from "../components/Loading";
+import Error from "../components/Error";
+import { detailProduct } from "../actions/productActions";
 
 const ProductPage = (props) => {
+  const dispatch = useDispatch();
+  const productDetails = useSelector((state) => state.productDetail);
+  const { loading, error, product } = productDetails;
+
   const { id } = useParams();
-  console.log(id);
-  const product = props.products.find((product) => Number(id) === product.id);
+  useEffect(() => {
+    dispatch(detailProduct(id));
+  }, []);
+
   const { image, name, description, totalReview, rating, price, stock, brand } =
     product;
-  console.log(product);
-  return (
+
+  return loading ? (
+    <Loading />
+  ) : error ? (
+    <Error>{error}</Error>
+  ) : (
     <article>
       <Link to="/" className="card-title">
         Back
