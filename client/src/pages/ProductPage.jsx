@@ -26,7 +26,7 @@ const ProductPage = () => {
   const { id } = useParams();
   useEffect(() => {
     dispatch(detailProduct(id));
-  }, [dispatch, id]);
+  }, [dispatch, id, product.image]);
 
   const productImage = (
     <Image key={product.id} src={product.image} alt={product.name} fluid />
@@ -49,70 +49,71 @@ const ProductPage = () => {
   ) : error ? (
     <Error>{error}</Error>
   ) : (
-    <article>
-      <Link to="/" className="card-title">
-        Back
-      </Link>
-      <Row>
-        <Col md={6}>{productImage}</Col>
-        <Col md={3}>
-          <ListGroup variant="flush">
-            <ListGroup.Item>
-              <h3>{product.name}</h3>
-              <p className="brand">Brand: {product.brand}</p>
-              <Rating rating={product.rating} />
-              <p>{product.totalReview} reviews</p>
-            </ListGroup.Item>
-            <ListGroup.Item className="product-price">
-              Price: ${product.price}
-            </ListGroup.Item>
-            <ListGroup.Item>
-              <p>Description:</p>
-              <p>{product.description}</p>
-            </ListGroup.Item>
-          </ListGroup>
-        </Col>
-        <Col md={3}>
-          <Card>
+    product.id === Number(id) && (
+      <article>
+        <Link to="/" className="card-title">
+          Back
+        </Link>
+        <Row>
+          <Col md={6}>{productImage}</Col>
+          <Col md={3}>
             <ListGroup variant="flush">
               <ListGroup.Item>
-                <Row>
-                  <Col>
-                    Price: <strong>${product.price}</strong>
-                  </Col>
-                </Row>
+                <h3>{product.name}</h3>
+                <p className="brand">Brand: {product.brand}</p>
+                <Rating rating={product.rating} />
+                <p>{product.totalReview} reviews</p>
+              </ListGroup.Item>
+              <ListGroup.Item className="product-price">
+                Price: ${product.price}
               </ListGroup.Item>
               <ListGroup.Item>
-                <Row>
-                  <Col>
-                    {product.stock > 0 ? (
-                      <strong className="in-stock">In Stock</strong>
-                    ) : (
-                      <strong className="out-of-stock">Out of Stock</strong>
-                    )}
-                  </Col>
-                </Row>
+                <p>Description:</p>
+                <p>{product.description}</p>
               </ListGroup.Item>
-              {product.stock > 0 && (
+            </ListGroup>
+          </Col>
+          <Col md={3}>
+            <Card>
+              <ListGroup variant="flush">
                 <ListGroup.Item>
                   <Row>
-                    <Col>Qty</Col>
-                    <Col xs="auto" className="my-1">
-                      <Form.Select
-                        size="sm"
-                        value={qty}
-                        onChange={(event) => setQty(event.target.value)}
-                      >
-                        {options}
-                      </Form.Select>
+                    <Col>
+                      Price: <strong>${product.price}</strong>
                     </Col>
                   </Row>
                 </ListGroup.Item>
-              )}
-              <ListGroup.Item>
-                <Row>
-                  <style type="text/css">
-                    {`
+                <ListGroup.Item>
+                  <Row>
+                    <Col>
+                      {product.stock > 0 ? (
+                        <strong className="in-stock">In Stock</strong>
+                      ) : (
+                        <strong className="out-of-stock">Out of Stock</strong>
+                      )}
+                    </Col>
+                  </Row>
+                </ListGroup.Item>
+                {product.stock > 0 && (
+                  <ListGroup.Item>
+                    <Row>
+                      <Col>Qty</Col>
+                      <Col xs="auto" className="my-1">
+                        <Form.Select
+                          size="sm"
+                          value={qty}
+                          onChange={(event) => setQty(event.target.value)}
+                        >
+                          {options}
+                        </Form.Select>
+                      </Col>
+                    </Row>
+                  </ListGroup.Item>
+                )}
+                <ListGroup.Item>
+                  <Row>
+                    <style type="text/css">
+                      {`
                         .btn-custom {
                         background-color: #ffa41c;
                         color: white;
@@ -123,23 +124,24 @@ const ProductPage = () => {
                           border: 1px solid black;
                         }
                         `}
-                  </style>
-                  <Button
-                    className="rounded-pill btn-sm"
-                    type="button"
-                    disabled={product.stock === 0}
-                    variant="custom"
-                    onClick={addToCart}
-                  >
-                    Add to Cart
-                  </Button>
-                </Row>
-              </ListGroup.Item>
-            </ListGroup>
-          </Card>
-        </Col>
-      </Row>
-    </article>
+                    </style>
+                    <Button
+                      className="rounded-pill btn-sm"
+                      type="button"
+                      disabled={product.stock === 0}
+                      variant="custom"
+                      onClick={addToCart}
+                    >
+                      Add to Cart
+                    </Button>
+                  </Row>
+                </ListGroup.Item>
+              </ListGroup>
+            </Card>
+          </Col>
+        </Row>
+      </article>
+    )
   );
 };
 
