@@ -18,10 +18,14 @@ const CartPage = () => {
 
   const location = useLocation().search.split("=")[1];
   const quantity = location ? Number(location) : 1;
+  const cart = useSelector((state) => state.cart.cartItems);
+  console.log("this is cart", cart);
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(addToCart(id, quantity));
+    if (id) {
+      dispatch(addToCart(id, quantity));
+    }
   }, [dispatch, id, quantity]);
 };
 
