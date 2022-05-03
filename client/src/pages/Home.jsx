@@ -4,7 +4,7 @@ import { listProducts } from "../actions/productActions";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import Loading from "../components/Loading";
-import Error from "../components/Error";
+import Message from "../components/Message";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -18,7 +18,7 @@ const Home = () => {
   const allProducts = loading ? (
     <Loading />
   ) : error ? (
-    <Error variant="danger"> {error} </Error>
+    <Message variant="danger"> {error} </Message>
   ) : (
     products.map((product) => {
       return (

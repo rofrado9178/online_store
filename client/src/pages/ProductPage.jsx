@@ -12,7 +12,7 @@ import Rating from "../components/Rating";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import Loading from "../components/Loading";
-import Error from "../components/Error";
+import Message from "../components/Message";
 import { detailProduct } from "../actions/productActions";
 
 const ProductPage = () => {
@@ -27,10 +27,6 @@ const ProductPage = () => {
   useEffect(() => {
     dispatch(detailProduct(id));
   }, [dispatch, id, product.image]);
-
-  const productImage = (
-    <Image key={product.id} src={product.image} alt={product.name} fluid />
-  );
 
   const options = [...Array(product.stock).keys()].map((stock) => {
     return (
@@ -47,7 +43,7 @@ const ProductPage = () => {
   return loading ? (
     <Loading />
   ) : error ? (
-    <Error>{error}</Error>
+    <Message>{error}</Message>
   ) : (
     product.id === Number(id) && (
       <article>
@@ -55,7 +51,14 @@ const ProductPage = () => {
           Back
         </Link>
         <Row>
-          <Col md={6}>{productImage}</Col>
+          <Col md={6}>
+            <Image
+              key={product.id}
+              src={product.image}
+              alt={product.name}
+              fluid
+            />
+          </Col>
           <Col md={3}>
             <ListGroup variant="flush">
               <ListGroup.Item>
