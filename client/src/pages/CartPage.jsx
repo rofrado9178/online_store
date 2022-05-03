@@ -14,12 +14,15 @@ import { addToCart } from "../actions/cartActions";
 import { useLocation, useParams } from "react-router-dom";
 
 const CartPage = () => {
-  const id = useParams();
+  const { id } = useParams();
 
   const location = useLocation().search.split("=")[1];
   const quantity = location ? Number(location) : 1;
-  console.log("qty", quantity);
-  console.log("productId", id);
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(addToCart(id, quantity));
+  }, [dispatch, id, quantity]);
 };
 
 export default CartPage;
