@@ -52,6 +52,11 @@ const CartPage = () => {
           </Form.Select>
         </Col>
         <Col md={2}>${item.price * item.quantity}</Col>
+        <Col md={1}>
+          <Button type="button" variant="light">
+            <i className="fas fa-trash"></i>
+          </Button>
+        </Col>
       </Row>
     </ListGroup.Item>
   ));
