@@ -23,7 +23,7 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
 
     case CART_REMOVE_ITEM:
       const removeItem = state.cartItems.filter(
-        (item) => item.product !== currentItem
+        (item) => item.product !== action.payload
       );
       return {
         ...state,

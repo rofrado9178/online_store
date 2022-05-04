@@ -11,7 +11,7 @@ import {
   Card,
   Container,
 } from "react-bootstrap";
-import { addToCart } from "../actions/cartActions";
+import { addToCart, removeItemFromCart } from "../actions/cartActions";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 import Message from "../components/Message";
 
@@ -22,10 +22,6 @@ const CartPage = () => {
   const location = useLocation().search.split("=")[1];
   const quantity = location ? Number(location) : 1;
   const cart = useSelector((state) => state.cart.cartItems);
-
-  const deleteFromCart = (id) => {
-    return cart.filter((item) => item.id !== id);
-  };
 
   const checkOut = () => {
     navigate(`/login?redirect=shiping`);
@@ -66,7 +62,8 @@ const CartPage = () => {
           <Button
             type="button"
             variant="light"
-            onClick={() => deleteFromCart(item.product)}
+            onClick={() => dispatch(removeItemFromCart(item.product))}
+            // onClick={() => console.log(item.product)}
           >
             <i className="fas fa-trash"></i>
           </Button>
