@@ -63,7 +63,6 @@ const CartPage = () => {
             type="button"
             variant="light"
             onClick={() => dispatch(removeItemFromCart(item.product))}
-            // onClick={() => console.log(item.product)}
           >
             <i className="fas fa-trash"></i>
           </Button>
