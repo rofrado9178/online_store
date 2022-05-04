@@ -12,11 +12,12 @@ import {
   Container,
 } from "react-bootstrap";
 import { addToCart } from "../actions/cartActions";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useParams, useNavigate } from "react-router-dom";
 import Message from "../components/Message";
 
 const CartPage = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const location = useLocation().search.split("=")[1];
   const quantity = location ? Number(location) : 1;
@@ -24,6 +25,10 @@ const CartPage = () => {
 
   const deleteFromCart = (id) => {
     return cart.filter((item) => item.id !== id);
+  };
+
+  const checkOut = () => {
+    navigate(`/login?redirect=shiping`);
   };
 
   const cartItems = cart.map((item) => (
@@ -127,6 +132,8 @@ const CartPage = () => {
               className="rounded-pill btn-sm"
               type="button"
               variant="custom"
+              disabled={cart.length === 0}
+              onClick={checkOut}
             >
               Checkout
             </Button>
