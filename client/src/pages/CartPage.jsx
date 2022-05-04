@@ -9,6 +9,7 @@ import {
   Form,
   Button,
   Card,
+  Container,
 } from "react-bootstrap";
 import { addToCart } from "../actions/cartActions";
 import { useLocation, useParams } from "react-router-dom";
@@ -21,9 +22,13 @@ const CartPage = () => {
   const quantity = location ? Number(location) : 1;
   const cart = useSelector((state) => state.cart.cartItems);
 
+  const deleteFromCart = (id) => {
+    return cart.filter((item) => item.id !== id);
+  };
+
   const cartItems = cart.map((item) => (
     <ListGroup.Item key={item.product}>
-      <Row>
+      <Row className="cart-item">
         <Col md={2}>
           <Image
             src={item.image}
@@ -37,7 +42,8 @@ const CartPage = () => {
         </Col>
         <Col md={2}>${item.price}</Col>
         <Col xs="auto" className="my-1">
-          <Form.Select
+          <Form.Control
+            as="select"
             size="sm"
             value={item.quantity}
             onChange={(event) =>
@@ -49,11 +55,14 @@ const CartPage = () => {
                 {qty + 1}
               </option>
             ))}
-          </Form.Select>
+          </Form.Control>
         </Col>
-        <Col md={2}>${item.price * item.quantity}</Col>
         <Col md={1}>
-          <Button type="button" variant="light">
+          <Button
+            type="button"
+            variant="light"
+            onClick={() => deleteFromCart(item.product)}
+          >
             <i className="fas fa-trash"></i>
           </Button>
         </Col>
@@ -70,8 +79,8 @@ const CartPage = () => {
 
   return (
     <Row>
+      <h1>Shoping Cart</h1>
       <Col md={8}>
-        <h1>Shoping Cart</h1>
         {cart.length === 0 ? (
           <Message variant="dark">
             <p>Your cart is empty!</p>
@@ -80,8 +89,49 @@ const CartPage = () => {
             </Link>
           </Message>
         ) : (
-          <ListGroup variant="flush">{cartItems}</ListGroup>
+          <ListGroup>{cartItems}</ListGroup>
         )}
+      </Col>
+      <Col md={4}>
+        <Card>
+          <ListGroup.Item>
+            <h2 className="total-items">
+              Total Items({cart.reduce((acc, item) => acc + item.quantity, 0)})
+            </h2>
+            <Row>
+              <Col>Subtotal</Col>
+              <Col>
+                $
+                {cart
+                  .reduce((acc, item) => acc + item.quantity * item.price, 0)
+                  .toFixed(2)}
+              </Col>
+            </Row>
+          </ListGroup.Item>
+          <ListGroup.Item>
+            <style type="text/css">
+              {`
+                        .btn-custom {
+                        background-color: #ffa41c;
+                        color: white;
+                        width: 100%;
+                        }
+                        .btn-custom:hover{
+                          background-color:white;
+                          color:black;
+                          border: 1px solid black;
+                        }
+                        `}
+            </style>
+            <Button
+              className="rounded-pill btn-sm"
+              type="button"
+              variant="custom"
+            >
+              Checkout
+            </Button>
+          </ListGroup.Item>
+        </Card>
       </Col>
     </Row>
   );

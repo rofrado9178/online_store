@@ -102,13 +102,14 @@ const ProductPage = () => {
                     <Row>
                       <Col>Qty</Col>
                       <Col xs="auto" className="my-1">
-                        <Form.Select
+                        <Form.Control
+                          as="select"
                           size="sm"
                           value={qty}
                           onChange={(event) => setQty(event.target.value)}
                         >
                           {options}
-                        </Form.Select>
+                        </Form.Control>
                       </Col>
                     </Row>
                   </ListGroup.Item>
