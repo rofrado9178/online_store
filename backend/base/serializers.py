@@ -13,6 +13,15 @@ class ReviewSerializer(serializers.ModelSerializer):
     fields = '__all__'
 
 class UserSerializer(serializers.ModelSerializer):
+  name = serializers.SerializerMethodField(read_only=True)
+
   class Meta:
     model = User
-    fields = ["id", "username", "email"]
+    fields = ["id", "username", "email", "name"]
+
+  def get_name(self,obj):
+    name = obj.first_name + " " + obj.last_name
+    if name == "":
+      name = obj.email
+
+    return name
