@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "../components/Loading";
@@ -12,12 +12,25 @@ const Login = () => {
   const [password, setPassword] = useState("");
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const redirect = location.search ? location.search.split("=")[1] : "/";
+
+  const loginUser = useSelector((state) => state.userLogin);
+  const { error, loading, user } = loginUser;
 
   const login = (event) => {
     event.preventDefault();
-    console.log("submited");
+    console.log("user", user);
     dispatch(loginUser(email, password));
   };
+
+  useEffect(() => {
+    if (user) {
+      navigate(redirect);
+    }
+  }, [user, redirect]);
 
   return (
     <FormContainer>
@@ -41,10 +54,20 @@ const Login = () => {
             onChange={(event) => setPassword(event.target.value)}
           ></Form.Control>
         </Form.Group>
-        <Button type="submit" variant="primary">
+
+        <Button type="submit" variant="dark" className="rounded my-4">
           Sign In
         </Button>
       </Form>
+
+      <Row className="py-3">
+        <Col>
+          New Customer?{" "}
+          <Link to={redirect ? `/register?redirect=${redirect}` : "/register"}>
+            <p>start here</p>
+          </Link>
+        </Col>
+      </Row>
     </FormContainer>
   );
 };
