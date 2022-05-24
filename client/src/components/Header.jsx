@@ -6,7 +6,9 @@ import { useDispatch } from "react-redux";
 const Header = () => {
   const dispatch = useDispatch();
   const logout = () => {
+    const data = {};
     dispatch();
+    localStorage.setItem("user", JSON.stringify(data));
   };
 
   return (

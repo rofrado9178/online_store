@@ -4,8 +4,8 @@ import { Form, Button, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "../components/Loading";
 import Message from "../components/Message";
-import { loginUser } from "../actions/userActions";
 import FormContainer from "../components/FormContainer";
+import { loginUser } from "../actions/userActions";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -17,20 +17,21 @@ const Login = () => {
 
   const redirect = location.search ? location.search.split("=")[1] : "/";
 
-  const loginUser = useSelector((state) => state.userLogin);
-  const { error, loading, user } = loginUser;
+  const loggedUser = useSelector((state) => state.userLogin);
+  const { error, loading, user } = loggedUser;
 
   const login = (event) => {
     event.preventDefault();
-    console.log("user", user);
     dispatch(loginUser(email, password));
+    setEmail("");
+    setPassword("");
   };
 
   useEffect(() => {
     if (user) {
       navigate(redirect);
     }
-  }, [user, redirect]);
+  }, [user, redirect, navigate]);
 
   return (
     <FormContainer>

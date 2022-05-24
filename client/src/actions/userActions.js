@@ -40,10 +40,10 @@ export const loginUser = (email, password) => async (dispatch) => {
   }
 };
 
-export const logout = () => async (dispatch) => {
-  try {
-    const data = {};
-    dispatch({ type: USER_LOG_OUT, payload: data });
-    localStorage.setItem("user", JSON.stringify(data));
-  } catch {}
-};
+// export const logout = () => async (dispatch) => {
+//   try {
+//     const data = {};
+//     dispatch({ type: USER_LOG_OUT, payload: data });
+//     localStorage.setItem("user", JSON.stringify(data));
+//   } catch {}
+// };
