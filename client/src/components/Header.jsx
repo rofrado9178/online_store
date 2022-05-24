@@ -1,10 +1,11 @@
 import { Container, Navbar, Nav, Row } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { logout } from "../actions/userActions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const Header = () => {
   const dispatch = useDispatch();
+  const loggedUser = useSelector((state) => state.userLogin.user);
   const logout = () => {
     const data = {};
     dispatch();
@@ -27,9 +28,16 @@ const Header = () => {
                 </Nav.Link>
               </LinkContainer>
               <LinkContainer to="/login">
-                <Nav.Link>
-                  <i className="fas fa-user"></i> Login
-                </Nav.Link>
+                {!loggedUser ? (
+                  <Nav.Link>
+                    <i className="fas fa-user"></i> Login
+                  </Nav.Link>
+                ) : (
+                  <Nav.Link>
+                    <i className="fas fa-user"></i>
+                    {" " + loggedUser.username}
+                  </Nav.Link>
+                )}
               </LinkContainer>
               <LinkContainer onClick={logout} to="/">
                 <Nav.Link>
