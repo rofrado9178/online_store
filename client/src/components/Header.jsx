@@ -6,10 +6,9 @@ import { useDispatch, useSelector } from "react-redux";
 const Header = () => {
   const dispatch = useDispatch();
   const loggedUser = useSelector((state) => state.userLogin.user);
-  const logout = () => {
-    const data = {};
-    dispatch();
-    localStorage.setItem("user", JSON.stringify(data));
+
+  const userLogout = () => {
+    dispatch(logout());
   };
 
   return (
@@ -27,19 +26,23 @@ const Header = () => {
                   <i className="fas fa-shopping-cart"></i> Cart
                 </Nav.Link>
               </LinkContainer>
-              <LinkContainer to="/login">
-                {!loggedUser ? (
+
+              {!loggedUser ? (
+                <LinkContainer to="/login">
                   <Nav.Link>
                     <i className="fas fa-user"></i> Login
                   </Nav.Link>
-                ) : (
+                </LinkContainer>
+              ) : (
+                <LinkContainer to="/profile">
                   <Nav.Link>
                     <i className="fas fa-user"></i>
-                    {" " + loggedUser.username}
+                    {" " + loggedUser.name}
                   </Nav.Link>
-                )}
-              </LinkContainer>
-              <LinkContainer onClick={logout} to="/">
+                </LinkContainer>
+              )}
+
+              <LinkContainer onClick={userLogout} to="/">
                 <Nav.Link>
                   <i className="fas fa-user"></i> Logout
                 </Nav.Link>
