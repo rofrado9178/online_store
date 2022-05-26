@@ -23,7 +23,6 @@ const RegisterPage = () => {
 
   const userRegister = useSelector((state) => state.userRegister);
   const { error, loading, user } = userRegister;
-  console.log(error);
 
   const register = (event) => {
     event.preventDefault();
@@ -34,32 +33,31 @@ const RegisterPage = () => {
       }, 3000);
       return;
     }
+
+    dispatch(registerUser(first_name, last_name, email, password));
+
     if (error) {
-      setMessage(error.message);
+      setTimeout(() => {
+        setMessage("User Already Exists");
+      }, 300);
+
       setTimeout(() => {
         setMessage("");
       }, 3000);
-      return;
     }
-    dispatch(registerUser(first_name, last_name, email, password));
-    setEmail("");
-    setPassword("");
-    setFirstName("");
-    setLastName("");
   };
 
-  // useEffect(() => {
-  //   if (user) {
-  //     navigate(redirect);
-  //   }
-  // }, [user, redirect, navigate]);
+  useEffect(() => {
+    if (user) {
+      navigate(redirect);
+    }
+  }, [user, redirect, navigate]);
 
   return (
     <section>
       <FormContainer>
         <h1>Register</h1>
         {message && <Message variant="danger">{message}</Message>}
-        {error && <Message variant="danger">{error}</Message>}
         {loading && <Loading />}
         <Form onSubmit={register}>
           <Form.Group controlId="firs_name">

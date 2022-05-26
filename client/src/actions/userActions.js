@@ -75,7 +75,10 @@ export const registerUser =
     } catch (error) {
       dispatch({
         type: USER_REGISTER_FAIL,
-        payload: error,
+        payload:
+          error.response && error.response.data.detail
+            ? error.response.data.detail
+            : error.message,
       });
     }
   };
