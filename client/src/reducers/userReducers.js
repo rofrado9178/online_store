@@ -38,6 +38,9 @@ export const userRegisterReducers = (state = {}, action) => {
     case USER_REGISTER_FAIL:
       return { loading: false, error: action.payload };
 
+    case USER_LOG_OUT:
+      return {};
+
     default:
       return state;
   }
