@@ -36,15 +36,15 @@ const RegisterPage = () => {
 
     dispatch(registerUser(first_name, last_name, email, password));
 
-    // if (error) {
-    //   setTimeout(() => {
-    //     setMessage("User Already Exists");
-    //   }, 300);
+    if (error) {
+      setTimeout(() => {
+        setMessage("User Already Exists");
+      }, 300);
 
-    //   setTimeout(() => {
-    //     setMessage("");
-    //   }, 3000);
-    // }
+      setTimeout(() => {
+        setMessage("");
+      }, 3000);
+    }
   };
 
   useEffect(() => {
@@ -58,7 +58,7 @@ const RegisterPage = () => {
       <FormContainer>
         <h1>Register</h1>
         {message && <Message variant="danger">{message}</Message>}
-        {error && <Message variant="danger">{error.message}</Message>}
+        {/* {error && <Message variant="danger">{error.message}</Message>} */}
         {loading && <Loading />}
         <Form onSubmit={register}>
           <Form.Group controlId="firs_name">

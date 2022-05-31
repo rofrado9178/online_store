@@ -6,6 +6,8 @@ import {
   USER_REGISTER_REQUEST,
   USER_REGISTER_SUCESS,
   USER_REGISTER_FAIL,
+  USER_PROFILE_REQUEST,
+  USER_PROFILE_SUCESS,
 } from "../constants/userConstants";
 import axios from "axios";
 
@@ -82,6 +84,37 @@ export const registerUser =
       });
     }
   };
+
+export const userProfile = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: USER_PROFILE_REQUEST,
+    });
+
+    const {
+      userLogin: { user },
+    } = getState();
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${user.token}`,
+      },
+    };
+
+    const { data } = await axios.get(`/api/users/${id}`, config);
+
+    dispatch({ type: USER_PROFILE_SUCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: USER_REGISTER_FAIL,
+      payload:
+        error.response && error.response.data.detail
+          ? error.response.data.detail
+          : error.message,
+    });
+  }
+};
 
 export const logout = () => async (dispatch) => {
   localStorage.removeItem("user");
