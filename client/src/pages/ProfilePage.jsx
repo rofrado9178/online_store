@@ -47,6 +47,8 @@ const ProfilePage = () => {
         {/* {error && <Message variant="danger">{error.message}</Message>} */}
         {loading && <Loading />}
         <Form onSubmit={updateProfile}>
+          <Form.Label>Email</Form.Label>
+          <p>{email}</p>
           <Form.Group controlId="firs_name">
             <Form.Label>First Name</Form.Label>
             <Form.Control
@@ -65,15 +67,7 @@ const ProfilePage = () => {
               onChange={(event) => setLastName(event.target.value)}
             ></Form.Control>
           </Form.Group>
-          <Form.Group controlId="email">
-            <Form.Label>Email</Form.Label>
-            <Form.Control
-              type="email"
-              placeholder="Email address"
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
-            ></Form.Control>
-          </Form.Group>
+
           <Form.Group controlId="password">
             <Form.Label>Password</Form.Label>
             <Form.Control
