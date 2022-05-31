@@ -4,7 +4,7 @@ import { Form, Button, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "../components/Loading";
 import Message from "../components/Message";
-import { userProfile } from "../actions/userActions";
+import { userProfile, updateProfile } from "../actions/userActions";
 
 const ProfilePage = () => {
   const [email, setEmail] = useState("");
@@ -21,9 +21,12 @@ const ProfilePage = () => {
   const userLogin = useSelector((state) => state.userLogin);
   const { error, loading, profile } = getProfile;
   const { user } = userLogin;
-  const name = profile.name.split(" ");
 
-  const updateProfile = () => {};
+  const updateProfile = (event) => {
+    event.preventDefault();
+
+    dispatch(updateProfile(first_name, last_name, password));
+  };
 
   useEffect(() => {
     if (!user) {
@@ -34,6 +37,7 @@ const ProfilePage = () => {
       dispatch(userProfile("profile"));
       return;
     }
+    const name = profile.name.split(" ");
     setFirstName(name[0]);
     setLastName(name[1]);
     setEmail(profile.email);
@@ -49,7 +53,7 @@ const ProfilePage = () => {
         <Form onSubmit={updateProfile}>
           <Form.Label>Email</Form.Label>
           <p>{email}</p>
-          <Form.Group controlId="firs_name">
+          <Form.Group controlId="first_name">
             <Form.Label>First Name</Form.Label>
             <Form.Control
               type="first_name"

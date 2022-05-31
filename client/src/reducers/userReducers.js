@@ -9,6 +9,9 @@ import {
   USER_PROFILE_REQUEST,
   USER_PROFILE_SUCESS,
   USER_PROFILE_FAIL,
+  UPDATE_PROFILE_REQUEST,
+  UPDATE_PROFILE_SUCESS,
+  UPDATE_PROFILE_FAIL,
 } from "../constants/userConstants";
 
 export const userLoginReducers = (state = {}, action) => {
@@ -58,6 +61,25 @@ export const userProfileReducers = (state = { profile: {} }, action) => {
       return { loading: false, profile: action.payload };
 
     case USER_PROFILE_FAIL:
+      return { loading: false, error: action.payload };
+
+    case USER_LOG_OUT:
+      return {};
+
+    default:
+      return state;
+  }
+};
+
+export const updateProfileReducers = (state = { profile: {} }, action) => {
+  switch (action.type) {
+    case UPDATE_PROFILE_REQUEST:
+      return { ...state, loading: true };
+
+    case UPDATE_PROFILE_SUCESS:
+      return { loading: false, profile: action.payload };
+
+    case UPDATE_PROFILE_FAIL:
       return { loading: false, error: action.payload };
 
     case USER_LOG_OUT:
