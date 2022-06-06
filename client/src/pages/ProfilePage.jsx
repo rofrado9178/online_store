@@ -29,6 +29,7 @@ const ProfilePage = () => {
     setLastName("");
     setPassword("");
     setConfirmPassword("");
+    setEmail("");
   };
 
   useEffect(() => {
@@ -66,6 +67,15 @@ const ProfilePage = () => {
               type="last_name"
               placeholder="Last Name"
               value={last_name}
+              onChange={(event) => setLastName(event.target.value)}
+            ></Form.Control>
+          </Form.Group>
+          <Form.Group controlId="last_name">
+            <Form.Label>Email</Form.Label>
+            <Form.Control
+              type="email"
+              placeholder="email"
+              value={email}
               onChange={(event) => setLastName(event.target.value)}
             ></Form.Control>
           </Form.Group>

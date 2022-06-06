@@ -121,7 +121,7 @@ export const userProfile = (id) => async (dispatch, getState) => {
 };
 
 export const updateProfile =
-  (first_name, last_name, password) => async (dispatch, getState) => {
+  (first_name, last_name, email, password) => async (dispatch, getState) => {
     try {
       dispatch({
         type: UPDATE_PROFILE_REQUEST,
@@ -143,6 +143,7 @@ export const updateProfile =
         {
           "first_name": first_name,
           "last_name": last_name,
+          "email": email,
           "password": password,
         },
         config
