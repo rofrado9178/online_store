@@ -151,7 +151,7 @@ export const updateProfile =
       dispatch({ type: UPDATE_PROFILE_SUCESS, payload: data });
     } catch (error) {
       dispatch({
-        type: USER_REGISTER_FAIL,
+        type: UPDATE_PROFILE_FAIL,
         payload:
           error.response && error.response.data.detail
             ? error.response.data.detail

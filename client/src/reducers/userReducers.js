@@ -12,6 +12,7 @@ import {
   UPDATE_PROFILE_REQUEST,
   UPDATE_PROFILE_SUCESS,
   UPDATE_PROFILE_FAIL,
+  UPDATE_PROFILE_RESET,
 } from "../constants/userConstants";
 
 export const userLoginReducers = (state = {}, action) => {
@@ -77,12 +78,12 @@ export const updateProfileReducers = (state = { profile: {} }, action) => {
       return { ...state, loading: true };
 
     case UPDATE_PROFILE_SUCESS:
-      return { loading: false, profile: action.payload };
+      return { loading: false, sucess: true, profile: action.payload };
 
     case UPDATE_PROFILE_FAIL:
       return { loading: false, error: action.payload };
 
-    case USER_LOG_OUT:
+    case UPDATE_PROFILE_RESET:
       return {};
 
     default:

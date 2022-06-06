@@ -22,10 +22,13 @@ const ProfilePage = () => {
   const { error, loading, profile } = getProfile;
   const { user } = userLogin;
 
-  const updateProfile = (event) => {
+  const updateUserProfile = (event) => {
     event.preventDefault();
-
     dispatch(updateProfile(first_name, last_name, password));
+    setFirstName("");
+    setLastName("");
+    setPassword("");
+    setConfirmPassword("");
   };
 
   useEffect(() => {
@@ -33,14 +36,7 @@ const ProfilePage = () => {
       navigate("/login");
       return;
     }
-    if (!profile || !profile.name) {
-      dispatch(userProfile("profile"));
-      return;
-    }
-    const name = profile.name.split(" ");
-    setFirstName(name[0]);
-    setLastName(name[1]);
-    setEmail(profile.email);
+    dispatch(userProfile("profile"));
   }, [user]);
 
   return (
@@ -50,9 +46,11 @@ const ProfilePage = () => {
         {message && <Message variant="danger">{message}</Message>}
         {/* {error && <Message variant="danger">{error.message}</Message>} */}
         {loading && <Loading />}
-        <Form onSubmit={updateProfile}>
+        <Form onSubmit={updateUserProfile}>
+          <Form.Label>Full Name</Form.Label>
+          <p>{profile.name}</p>
           <Form.Label>Email</Form.Label>
-          <p>{email}</p>
+          <p>{profile.email}</p>
           <Form.Group controlId="first_name">
             <Form.Label>First Name</Form.Label>
             <Form.Control
