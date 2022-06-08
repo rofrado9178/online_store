@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Loading from "../components/Loading";
 import Message from "../components/Message";
 import { userProfile, updateProfile } from "../actions/userActions";
+import { UPDATE_PROFILE_RESET } from "../constants/userConstants";
 
 const ProfilePage = () => {
   const [email, setEmail] = useState("");
@@ -19,17 +20,19 @@ const ProfilePage = () => {
 
   const getProfile = useSelector((state) => state.userProfile);
   const userLogin = useSelector((state) => state.userLogin);
+  const userUpdateProfile = useSelector((state) => state.updateProfile);
   const { error, loading, profile } = getProfile;
   const { user } = userLogin;
+  const { success } = userUpdateProfile;
 
   const updateUserProfile = (event) => {
     event.preventDefault();
-    dispatch(updateProfile(first_name, last_name, password));
-    setFirstName("");
-    setLastName("");
-    setPassword("");
-    setConfirmPassword("");
-    setEmail("");
+    dispatch(updateProfile(first_name, last_name, email, password));
+    // setFirstName("");
+    // setLastName("");
+    // setPassword("");
+    // setConfirmPassword("");
+    // setEmail("");
   };
 
   useEffect(() => {
@@ -37,8 +40,12 @@ const ProfilePage = () => {
       navigate("/login");
       return;
     }
-    dispatch(userProfile("profile"));
-  }, [user]);
+    if (!profile || !profile.name || success) {
+      dispatch({ type: UPDATE_PROFILE_RESET });
+      dispatch(userProfile("profile"));
+      return;
+    }
+  }, [user, dispatch, navigate, success, profile]);
 
   return (
     <Row>
@@ -76,7 +83,7 @@ const ProfilePage = () => {
               type="email"
               placeholder="email"
               value={email}
-              onChange={(event) => setLastName(event.target.value)}
+              onChange={(event) => setEmail(event.target.value)}
             ></Form.Control>
           </Form.Group>
 

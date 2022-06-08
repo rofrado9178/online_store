@@ -72,10 +72,10 @@ export const userProfileReducers = (state = { profile: {} }, action) => {
   }
 };
 
-export const updateProfileReducers = (state = { profile: {} }, action) => {
+export const updateProfileReducers = (state = {}, action) => {
   switch (action.type) {
     case UPDATE_PROFILE_REQUEST:
-      return { ...state, loading: true };
+      return { loading: true };
 
     case UPDATE_PROFILE_SUCESS:
       return { loading: false, sucess: true, profile: action.payload };
