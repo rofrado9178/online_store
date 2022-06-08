@@ -19,6 +19,7 @@ from rest_framework import status
 
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+
     #customize user info token
     def validate(self,attribute):
       data = super().validate(attribute)
@@ -30,10 +31,11 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         
       
       return data
-
+      
 
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
+    
 
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
@@ -86,5 +88,5 @@ def registerUser(request):
     return Response(serializer.data)
   
   except:
-    message = {"User with this email already exists"}
+    message = {"detail":"User with this email already exists"}
     return Response(message, status=status.HTTP_400_BAD_REQUEST)

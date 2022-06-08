@@ -10,6 +10,7 @@ import { loginUser } from "../actions/userActions";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -31,7 +32,7 @@ const Login = () => {
     if (user) {
       navigate(redirect);
     }
-  }, [user, redirect, navigate]);
+  }, [user, redirect, navigate, error]);
 
   return (
     <FormContainer>

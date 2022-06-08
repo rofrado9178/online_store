@@ -41,21 +41,13 @@ const RegisterPage = () => {
     if (user) {
       navigate(redirect);
     }
-    if (error) {
-      setMessage("User Already Exists");
-
-      setTimeout(() => {
-        setMessage("");
-      }, 3000);
-    }
   }, [user, redirect, navigate, error]);
 
   return (
     <section>
       <FormContainer>
         <h1>Register</h1>
-        {message && <Message variant="danger">{message}</Message>}
-        {/* {error && <Message variant="danger">{message}</Message>} */}
+        {error && <Message variant="danger">{error}</Message>}
         {loading && <Loading />}
         <Form onSubmit={register}>
           <Form.Group controlId="firs_name">
