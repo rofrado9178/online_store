@@ -28,12 +28,11 @@ const ProfilePage = () => {
   const updateUserProfile = (event) => {
     event.preventDefault();
     dispatch(updateProfile(first_name, last_name, email, password));
-    // setFirstName("");
-    // setLastName("");
-    // setPassword("");
-    // setConfirmPassword("");
-    // setEmail("");
-    dispatch(userProfile("profile"));
+    setFirstName("");
+    setLastName("");
+    setPassword("");
+    setConfirmPassword("");
+    setEmail("");
   };
 
   useEffect(() => {

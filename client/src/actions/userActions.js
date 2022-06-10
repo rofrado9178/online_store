@@ -151,6 +151,7 @@ export const updateProfile =
 
       dispatch({ type: UPDATE_PROFILE_SUCESS, payload: data });
       dispatch({ type: USER_LOGIN_SUCESS, payload: data });
+      dispatch({ type: USER_PROFILE_SUCESS, payload: data });
       localStorage.setItem("user", JSON.stringify(data));
     } catch (error) {
       dispatch({
