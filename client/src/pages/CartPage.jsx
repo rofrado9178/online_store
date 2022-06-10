@@ -24,7 +24,7 @@ const CartPage = () => {
   const cart = useSelector((state) => state.cart.cartItems);
 
   const checkOut = () => {
-    navigate(`/login?redirect=shiping`);
+    navigate(`/login?redirect=/shipping`);
   };
 
   const cartItems = cart.map((item) => (
