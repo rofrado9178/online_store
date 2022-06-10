@@ -27,8 +27,11 @@ const ProfilePage = () => {
 
   const updateUserProfile = (event) => {
     event.preventDefault();
-    if (password != confirmPassword) {
+    if (password !== confirmPassword) {
       setMessage("Password does not match");
+      setTimeout(() => {
+        setMessage("");
+      }, 3000);
       return;
     }
     dispatch(updateProfile(first_name, last_name, email, password));
