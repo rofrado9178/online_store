@@ -3,6 +3,7 @@ import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import FormContainer from "../components/FormContainer";
 import { saveShippingAddress } from "../actions/cartActions";
+import { useNavigate } from "react-router-dom";
 
 const ShippingPage = () => {
   const cart = useSelector((state) => state.cart);
@@ -15,6 +16,7 @@ const ShippingPage = () => {
   const [phoneNumber, setPhoneNumber] = useState(shippingAddress.phoneNumber);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const addShipping = (event) => {
     event.preventDefault();
@@ -28,6 +30,7 @@ const ShippingPage = () => {
         phoneNumber,
       })
     );
+    navigate("/payment");
   };
 
   return (
