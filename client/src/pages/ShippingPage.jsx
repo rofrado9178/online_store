@@ -8,9 +8,13 @@ const ShippingPage = () => {
   const [city, setCity] = useState("");
   const [postalCode, setPostalCode] = useState("");
   const [province, setProvince] = useState("");
+  const [country, setCountry] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
 
-  const addShipping = () => {};
+  const addShipping = (event) => {
+    event.preventDefault();
+    console.log("submited");
+  };
 
   return (
     <FormContainer>
@@ -59,6 +63,19 @@ const ShippingPage = () => {
             onChange={(event) => setProvince(event.target.value)}
           ></Form.Control>
         </Form.Group>
+        <Form.Group
+          controlId="
+        province"
+        >
+          <Form.Label>Country</Form.Label>
+          <Form.Control
+            required
+            type="text"
+            placeholder="Enter Country"
+            value={country ? country : ""}
+            onChange={(event) => setCountry(event.target.value)}
+          ></Form.Control>
+        </Form.Group>
         <Form.Group controlId="phone">
           <Form.Label>Phone Number</Form.Label>
           <Form.Control
@@ -69,6 +86,9 @@ const ShippingPage = () => {
             onChange={(event) => setPhoneNumber(event.target.value)}
           ></Form.Control>
         </Form.Group>
+        <Button type="submit" variant="primary" onClick={addShipping}>
+          Continue
+        </Button>
       </Form>
     </FormContainer>
   );
