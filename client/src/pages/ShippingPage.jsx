@@ -14,8 +14,9 @@ const ShippingPage = () => {
 
   return (
     <FormContainer>
+      <h1>Shipping Details</h1>
       <Form onSubit={addShipping}>
-        <Form.Group>
+        <Form.Group controlId="address">
           <Form.Label>Address</Form.Label>
           <Form.Control
             required
@@ -25,7 +26,7 @@ const ShippingPage = () => {
             onChange={(event) => setAddress(event.target.value)}
           ></Form.Control>
         </Form.Group>
-        <Form.Group>
+        <Form.Group controlId="city">
           <Form.Label>City</Form.Label>
           <Form.Control
             required
@@ -35,7 +36,7 @@ const ShippingPage = () => {
             onChange={(event) => setCity(event.target.value)}
           ></Form.Control>
         </Form.Group>
-        <Form.Group>
+        <Form.Group controlId="postalCode">
           <Form.Label>Postal Code</Form.Label>
           <Form.Control
             required
@@ -45,17 +46,20 @@ const ShippingPage = () => {
             onChange={(event) => setPostalCode(event.target.value)}
           ></Form.Control>
         </Form.Group>
-        <Form.Group>
+        <Form.Group
+          controlId="
+        province"
+        >
           <Form.Label>Province</Form.Label>
           <Form.Control
             required
             type="text"
-            placeholder="Enter Address"
+            placeholder="Enter Province"
             value={province ? province : ""}
             onChange={(event) => setProvince(event.target.value)}
           ></Form.Control>
         </Form.Group>
-        <Form.Group>
+        <Form.Group controlId="phone">
           <Form.Label>Phone Number</Form.Label>
           <Form.Control
             required
