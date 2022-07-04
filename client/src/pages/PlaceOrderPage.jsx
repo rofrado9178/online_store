@@ -8,6 +8,51 @@ import CheckoutSteps from "../components/CheckoutSteps";
 
 const PlaceOrderPage = () => {
   const cart = useSelector((state) => state.cart);
+  const province = cart.shippingAddress.province.toLowerCase();
+
+  const whatProvince = (price, name) => {
+    let taxByProvince;
+    switch (name) {
+      case "alberta":
+        return (taxByProvince = 0.05 * price);
+
+      case "british columbia":
+      case "manitoba":
+        return (taxByProvince = 0.12 * price);
+
+      case "new brunswick":
+      case "newfoundland and labrador":
+      case "nova scotia":
+      case "prince edward island":
+      case "quebec":
+        return (taxByProvince = 0.15 * price);
+
+      case "nortwest territories":
+      case "nunavut":
+      case "yukon":
+        return (taxByProvince = 0.05 * price);
+
+      case "saskatchewan":
+        return (taxByProvince = 0.11 * price);
+
+      default:
+        return (taxByProvince = 0);
+    }
+  };
+
+  cart.itemsPrice = cart.cartItems
+    .reduce((acc, item) => acc + item.price * item.quantity, 0)
+    .toFixed(2);
+
+  cart.shippingPrice = cart.itemsPrice > 100 ? 0 : 10;
+
+  cart.taxPrice = whatProvince(cart.itemsPrice, province);
+
+  cart.totalPrice = Number(cart.itemsPrice) + Number(cart.taxPrice);
+
+  const placeOrder = () => {
+    console.log("placeOrder");
+  };
 
   return (
     <section>
@@ -37,7 +82,7 @@ const PlaceOrderPage = () => {
               ) : (
                 <ListGroup variant="flush">
                   {cart.cartItems.map((item, index) => (
-                    <ListGroup.Item>
+                    <ListGroup.Item key={item.product}>
                       <Row>
                         <Col sm={2}>
                           <Image
@@ -64,7 +109,50 @@ const PlaceOrderPage = () => {
             </ListGroup.Item>
           </ListGroup>
         </Col>
-        <Col md={4}></Col>
+        <Col md={4}>
+          <Card>
+            <ListGroup variant="flush">
+              <ListGroup.Item>
+                <h2>Order Summary</h2>
+              </ListGroup.Item>
+              <ListGroup.Item>
+                <Row>
+                  <Col>Item: </Col>
+                  <Col>$ {cart.itemsPrice}</Col>
+                </Row>
+              </ListGroup.Item>
+              <ListGroup.Item>
+                <Row>
+                  <Col>Shipping: </Col>
+                  <Col>$ {cart.shippingPrice}</Col>
+                </Row>
+              </ListGroup.Item>
+              <ListGroup.Item>
+                <Row>
+                  <Col>Tax: </Col>
+                  <Col>$ {cart.taxPrice}</Col>
+                </Row>
+              </ListGroup.Item>
+              <ListGroup.Item>
+                <Row>
+                  <Col>Total: </Col>
+                  <Col>$ {cart.totalPrice.toFixed(2)}</Col>
+                </Row>
+              </ListGroup.Item>
+
+              <ListGroup.Item>
+                <Button
+                  type="button"
+                  className="btn-block"
+                  disabled={!cart.cartItems}
+                  onClick={placeOrder}
+                >
+                  Place Order
+                </Button>
+              </ListGroup.Item>
+            </ListGroup>
+          </Card>
+        </Col>
       </Row>
     </section>
   );
