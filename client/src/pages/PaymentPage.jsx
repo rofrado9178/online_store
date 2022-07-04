@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import FormContainer from "../components/FormContainer";
 import CheckoutSteps from "../components/CheckoutSteps";
 import { useNavigate } from "react-router-dom";
+import { savePaymentMethod } from "../actions/cartActions";
 
 const PaymentPage = () => {
   const cart = useSelector((state) => state.cart);
@@ -20,6 +21,8 @@ const PaymentPage = () => {
 
   const paymentHandler = (event) => {
     event.preventDefault();
+    dispatch(savePaymentMethod(paymentMethod));
+    navigate("/placeorder");
   };
 
   return (
