@@ -10,6 +10,7 @@ import RegisterPage from "./pages/RegisterPage";
 import ProfilePage from "./pages/ProfilePage";
 import ShippingPage from "./pages/ShippingPage";
 import PaymentPage from "./pages/PaymentPage";
+import PlaceOrderPage from "./pages/PlaceOrderPage";
 
 const App = () => {
   return (
@@ -27,6 +28,7 @@ const App = () => {
             <Route exact path="/profile" element={<ProfilePage />} />
             <Route exact path="/shipping" element={<ShippingPage />} />
             <Route exact path="/payment" element={<PaymentPage />} />
+            <Route exact path="/placeorder" element={<PlaceOrderPage />} />
           </Routes>
         </Container>
       </main>
