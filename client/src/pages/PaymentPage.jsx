@@ -3,6 +3,7 @@ import { Form, Button, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import FormContainer from "../components/FormContainer";
 import CheckoutSteps from "../components/CheckoutSteps";
+import CustomButton from "../components/CustomButton";
 import { useNavigate } from "react-router-dom";
 import { savePaymentMethod } from "../actions/cartActions";
 
@@ -42,9 +43,7 @@ const PaymentPage = () => {
             ></Form.Check>
           </Col>
         </Form.Group>
-        <Button type="submit" variant="primary">
-          Continue
-        </Button>
+        <CustomButton>Choose Payment</CustomButton>
       </Form>
     </FormContainer>
   );

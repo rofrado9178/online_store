@@ -14,8 +14,10 @@ import {
 import { addToCart, removeItemFromCart } from "../actions/cartActions";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 import Message from "../components/Message";
+import CustomButton from "../components/CustomButton";
 
-const CartPage = () => {
+const CartPage = (props) => {
+  console.log(props);
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -24,6 +26,7 @@ const CartPage = () => {
   const cart = useSelector((state) => state.cart.cartItems);
 
   const checkOut = () => {
+    console.log("click");
     navigate(`/login?redirect=/shipping`);
   };
 
@@ -133,6 +136,12 @@ const CartPage = () => {
             >
               Checkout
             </Button>
+            {/* <CustomButton
+              disabled={cart.length === 0}
+              onClick={() => checkOut()}
+            >
+              Checkout
+            </CustomButton> */}
           </ListGroup.Item>
         </Card>
       </Col>

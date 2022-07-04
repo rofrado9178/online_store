@@ -141,11 +141,26 @@ const PlaceOrderPage = () => {
               </ListGroup.Item>
 
               <ListGroup.Item>
+                <style type="text/css">
+                  {`
+                        .btn-custom {
+                        background-color: #ffa41c;
+                        color: white;
+                        width: 100%;
+                        }
+                        .btn-custom:hover{
+                          background-color:white;
+                          color:black;
+                          border: 1px solid black;
+                        }
+                        `}
+                </style>
                 <Button
                   type="button"
-                  className="btn-block"
+                  className="rounded-pill btn-sm"
                   disabled={!cart.cartItems}
                   onClick={placeOrder}
+                  variant="custom"
                 >
                   Place Order
                 </Button>

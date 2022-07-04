@@ -105,7 +105,22 @@ const ShippingPage = () => {
             onChange={(event) => setPhoneNumber(event.target.value)}
           ></Form.Control>
         </Form.Group>
-        <Button type="submit" variant="primary">
+        <style type="text/css">
+          {`
+                        .btn-custom {
+                        background-color: #ffa41c;
+                        color: white;
+                        width: 100%;
+                        margin-top:10px;
+                        }
+                        .btn-custom:hover{
+                          background-color:white;
+                          color:black;
+                          border: 1px solid black;
+                        }
+                        `}
+        </style>
+        <Button type="submit" variant="custom" className="rounded-pill btn-sm">
           Continue
         </Button>
       </Form>
