@@ -125,13 +125,13 @@ const PlaceOrderPage = () => {
               <ListGroup.Item>
                 <Row>
                   <Col>Shipping: </Col>
-                  <Col>$ {cart.shippingPrice}</Col>
+                  <Col>$ {cart.shippingPrice.toFixed(2)}</Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
                   <Col>Tax: </Col>
-                  <Col>$ {cart.taxPrice}</Col>
+                  <Col>$ {cart.taxPrice.toFixed(2)}</Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
