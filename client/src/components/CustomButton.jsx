@@ -1,5 +1,5 @@
 import { Button } from "react-bootstrap";
-const CustomButton = ({ children }) => {
+const CustomButton = ({ onClick, children, disabled }) => {
   return (
     <section>
       <style type="text/css">
@@ -22,7 +22,8 @@ const CustomButton = ({ children }) => {
         type="submit"
         className="rounded-pill btn-sm"
         variant="custom"
-        onClick={(submit) => submit}
+        onClick={() => onClick()}
+        disabled={disabled}
       >
         {children}
       </Button>

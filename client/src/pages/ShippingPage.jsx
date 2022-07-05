@@ -3,6 +3,7 @@ import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import FormContainer from "../components/FormContainer";
 import CheckoutSteps from "../components/CheckoutSteps";
+import CustomButton from "../components/CustomButton";
 import { saveShippingAddress } from "../actions/cartActions";
 import { useNavigate } from "react-router-dom";
 
@@ -105,24 +106,7 @@ const ShippingPage = () => {
             onChange={(event) => setPhoneNumber(event.target.value)}
           ></Form.Control>
         </Form.Group>
-        <style type="text/css">
-          {`
-                        .btn-custom {
-                        background-color: #ffa41c;
-                        color: white;
-                        width: 100%;
-                        margin-top:10px;
-                        }
-                        .btn-custom:hover{
-                          background-color:white;
-                          color:black;
-                          border: 1px solid black;
-                        }
-                        `}
-        </style>
-        <Button type="submit" variant="custom" className="rounded-pill btn-sm">
-          Continue
-        </Button>
+        <CustomButton>Continue</CustomButton>
       </Form>
     </FormContainer>
   );

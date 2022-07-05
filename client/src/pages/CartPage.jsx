@@ -113,35 +113,9 @@ const CartPage = (props) => {
             </Row>
           </ListGroup.Item>
           <ListGroup.Item>
-            <style type="text/css">
-              {`
-                        .btn-custom {
-                        background-color: #ffa41c;
-                        color: white;
-                        width: 100%;
-                        }
-                        .btn-custom:hover{
-                          background-color:white;
-                          color:black;
-                          border: 1px solid black;
-                        }
-                        `}
-            </style>
-            <Button
-              className="rounded-pill btn-sm"
-              type="button"
-              variant="custom"
-              disabled={cart.length === 0}
-              onClick={checkOut}
-            >
+            <CustomButton disabled={!cart.length} onClick={() => checkOut()}>
               Checkout
-            </Button>
-            {/* <CustomButton
-              disabled={cart.length === 0}
-              onClick={() => checkOut()}
-            >
-              Checkout
-            </CustomButton> */}
+            </CustomButton>
           </ListGroup.Item>
         </Card>
       </Col>

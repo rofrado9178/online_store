@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import Message from "../components/Message";
 import FormContainer from "../components/FormContainer";
 import CheckoutSteps from "../components/CheckoutSteps";
+import CustomButton from "../components/CustomButton";
 
 const PlaceOrderPage = () => {
   const cart = useSelector((state) => state.cart);
@@ -141,29 +142,12 @@ const PlaceOrderPage = () => {
               </ListGroup.Item>
 
               <ListGroup.Item>
-                <style type="text/css">
-                  {`
-                        .btn-custom {
-                        background-color: #ffa41c;
-                        color: white;
-                        width: 100%;
-                        }
-                        .btn-custom:hover{
-                          background-color:white;
-                          color:black;
-                          border: 1px solid black;
-                        }
-                        `}
-                </style>
-                <Button
-                  type="button"
-                  className="rounded-pill btn-sm"
+                <CustomButton
+                  onClick={() => placeOrder()}
                   disabled={!cart.cartItems}
-                  onClick={placeOrder}
-                  variant="custom"
                 >
                   Place Order
-                </Button>
+                </CustomButton>
               </ListGroup.Item>
             </ListGroup>
           </Card>
