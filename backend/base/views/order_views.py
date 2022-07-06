@@ -6,6 +6,7 @@ from rest_framework.response import Response
 
 from rest_framework import status
 from backend.base.models import OrderItem, ShippingAddress, Order, Product
+from base.serializers import ProductSerializer, OrderSerializer, UserSerializer
 
 
 @api_view(["POST"])
@@ -56,5 +57,5 @@ def addOrderItems(request):
 
     product.stock -= item.quantity
     product.save()
-    
-  return Response("ORDER")
+  serializer = OrderSerializer(order, many=True) 
+  return Response(serializer.data)
