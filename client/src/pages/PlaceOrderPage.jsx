@@ -1,15 +1,20 @@
 import { useState, useEffect } from "react";
 import { Button, Row, Col, ListGroup, Image, Card } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Message from "../components/Message";
 import FormContainer from "../components/FormContainer";
 import CheckoutSteps from "../components/CheckoutSteps";
 import CustomButton from "../components/CustomButton";
+import { createOrder } from "../actions/orderActions";
 
 const PlaceOrderPage = () => {
   const cart = useSelector((state) => state.cart);
+  const orderCreate = useSelector((state) => state.orderCreate);
+  const { order, error, success } = orderCreate;
   const province = cart.shippingAddress.province.toLowerCase();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const whatProvince = (price, name) => {
     let taxByProvince;
@@ -51,8 +56,24 @@ const PlaceOrderPage = () => {
 
   cart.totalPrice = Number(cart.itemsPrice) + Number(cart.taxPrice);
 
+  useEffect(() => {
+    if (success) {
+      navigate(`/order/${order.id}`);
+    }
+  }, [success, navigate]);
+
   const placeOrder = () => {
-    console.log("placeOrder");
+    dispatch(
+      createOrder({
+        orderItems: cart.cartItems,
+        shippingAddress: cart.shippingAddress,
+        paymentMethod: cart.paymentMethod,
+        itemsPrice: cart.itemsPrice,
+        shippingPrice: cart.shippingPrice,
+        taxPrice: cart.taxPrice,
+        totalPrice: cart.totalPrice,
+      })
+    );
   };
 
   return (
