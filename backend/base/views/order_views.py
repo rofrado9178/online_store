@@ -16,6 +16,7 @@ def addOrderItems(request):
   user = request.user 
   data = request.data
   orderItems = data['orderItems']
+  print(data)
 
   if orderItems and len(orderItems) == 0:
     return Response({"detail": "No Order Items"}, status=status.HTTP_400_BAD_REQUEST)
@@ -31,7 +32,6 @@ def addOrderItems(request):
   
     #create shipping address
     shipping = ShippingAddress.objects.create(
-      
       order=order,
       address=data["shippingAddress"]["address"],
       city=data["shippingAddress"]["city"],
@@ -48,14 +48,14 @@ def addOrderItems(request):
         product=product,
         order=order,
         name=product.name,
-        quantity=i["price"],
+        quantity=i["quantity"],
         price=i["price"],
         image=product.image.url
       )
 
     #update stock
 
-    product.stock -= item.quantity
-    product.save()
-  serializer = OrderSerializer(order, many=True) 
+      product.stock -= item.quantity
+      product.save()
+  serializer = OrderSerializer(order, many=False) 
   return Response(serializer.data)
