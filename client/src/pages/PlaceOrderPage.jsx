@@ -56,12 +56,6 @@ const PlaceOrderPage = () => {
 
   cart.totalPrice = Number(cart.itemsPrice) + Number(cart.taxPrice);
 
-  useEffect(() => {
-    if (success) {
-      navigate(`/order/${order.id}`);
-    }
-  }, [success, navigate]);
-
   const placeOrder = () => {
     dispatch(
       createOrder({
@@ -75,6 +69,12 @@ const PlaceOrderPage = () => {
       })
     );
   };
+
+  useEffect(() => {
+    if (success) {
+      navigate(`/order/${order.id}`);
+    }
+  }, [success, navigate]);
 
   return (
     <section>
@@ -103,7 +103,7 @@ const PlaceOrderPage = () => {
                 <Message variant="info">Your cart is empty</Message>
               ) : (
                 <ListGroup variant="flush">
-                  {cart.cartItems.map((item, index) => (
+                  {cart.cartItems.map((item) => (
                     <ListGroup.Item key={item.product}>
                       <Row>
                         <Col sm={2}>
@@ -161,7 +161,9 @@ const PlaceOrderPage = () => {
                   <Col>$ {cart.totalPrice.toFixed(2)}</Col>
                 </Row>
               </ListGroup.Item>
-
+              <ListGroup.Item>
+                {error && <Message variant="danger">{error}</Message>}
+              </ListGroup.Item>
               <ListGroup.Item>
                 <CustomButton
                   onClick={() => placeOrder()}

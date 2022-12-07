@@ -26,7 +26,6 @@ const CartPage = (props) => {
   const cart = useSelector((state) => state.cart.cartItems);
 
   const checkOut = () => {
-    console.log("click");
     navigate(`/login?redirect=/shipping`);
   };
 
