@@ -11,7 +11,7 @@ import { createOrder } from "../actions/orderActions";
 const PlaceOrderPage = () => {
   const cart = useSelector((state) => state.cart);
   const orderCreate = useSelector((state) => state.orderCreate);
-  const { order, error, success } = orderCreate;
+  const { orderItems, error, success } = orderCreate;
   const province = cart.shippingAddress.province.toLowerCase();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -72,9 +72,9 @@ const PlaceOrderPage = () => {
 
   useEffect(() => {
     if (success) {
-      navigate(`/order/${order.id}`);
+      navigate(`/order/${orderItems.id}`);
     }
-  }, [success, navigate]);
+  }, [success]);
 
   return (
     <section>
